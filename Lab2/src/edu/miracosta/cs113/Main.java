@@ -2,11 +2,6 @@ package edu.miracosta.cs113;
 
 import java.util.Scanner;
 
-/**
-*@author Isaac Earnhart
-*@version 1.0
-**/
-
 /*******************************************
 * ALGORITHM
 * 
@@ -32,6 +27,10 @@ import java.util.Scanner;
 * 
 ********************************************/
 
+/**
+*@author Isaac Earnhart
+*@version 1.0
+**/
 public class Main 
 {
 	public static void main(String[] args)
