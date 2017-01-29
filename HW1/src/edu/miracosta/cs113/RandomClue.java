@@ -1,3 +1,4 @@
+package edu.miracosta.cs113;
 
 /**
  * RandomClue.java : Random solver for the Clue problem

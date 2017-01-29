@@ -1,3 +1,5 @@
+package edu.miracosta.cs113;
+
 /**
  * Theory.java : stores values for weapon, location, and person
  * 

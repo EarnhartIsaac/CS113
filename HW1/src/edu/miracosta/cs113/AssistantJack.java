@@ -1,3 +1,5 @@
+package edu.miracosta.cs113;
+
 
 /**
  * AssistantJack.java : will be asked various theories by Detective Jill,

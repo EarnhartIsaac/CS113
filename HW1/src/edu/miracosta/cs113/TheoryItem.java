@@ -1,3 +1,5 @@
+package edu.miracosta.cs113;
+
 /**
  * TheoryItem.java : Convenient class helps to keep track of different kinds of
  * murders, locations, and weapons. Constants can be used as limits (1 -
