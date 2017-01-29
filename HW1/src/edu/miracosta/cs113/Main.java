@@ -2,6 +2,35 @@ package edu.miracosta.cs113;
 
 import java.util.Scanner;
 
+/*******************************************
+* ALGORITHM
+* 
+* murder is 1
+* weapon is 1
+* location is 1
+* 
+* BOOLEAN solved is false
+* 
+* DO
+* 	solution is AssistantJack check weapon,location,murder
+* 	SWITCH solution
+* 		CASE 1
+* 			ADD 1 to weapon
+* 		CASE 2
+* 			ADD 1 to location
+* 		CASE 3 
+* 			ADD 1 to murder
+* 		CASE 0
+* 			solved is true
+* 	END SWITCH
+* WHILE not solved
+********************************************/
+
+/**
+ * 
+ * @author Isaac Earnhart
+ * 
+ */
 public class Main 
 {
 	/**
