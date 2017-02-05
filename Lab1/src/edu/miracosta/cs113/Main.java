@@ -26,10 +26,13 @@ public class Main
 {
 	public static void main(String[] args)
 	{
+		boolean multipleOf3;
+		boolean multipleOf5;
+		
 		for(int counter = 1;counter < 101;counter++)
 		{
-			boolean multipleOf3 = (counter%3 == 0);
-			boolean multipleOf5 = (counter%5 == 0);
+			multipleOf3 = (counter%3 == 0);
+			multipleOf5 = (counter%5 == 0);
 			
 			if(multipleOf3 && multipleOf5)
 			{

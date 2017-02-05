@@ -6,8 +6,6 @@ package edu.miracosta.cs113;
  * @author Nery Chapeton-Lamas (material from Kevin Lewis)
  * @version 1.0
  *
- *          TODO Upgrade Theory to error check/handle weapon, location, and
- *          person values. Update documentation accordingly
  */
 
 public class Theory {
