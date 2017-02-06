@@ -28,9 +28,9 @@ public class ComputeAreaAndPerimeter
 		System.out.println("Enter C for circe");
 		System.out.println("Enter R for Rectangle");
 		System.out.println("Enter T for Right Triangle");
-		//FIXME
+
 		String figType = in.nextLine();
-		in.close();
+
 		if(figType.equalsIgnoreCase("c"))
 		{
 			return new Circle();

@@ -56,7 +56,7 @@ public class RtTriangle extends Shape
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter the width of triangle");
 		width = in.nextDouble();
-		System.out.println("Eneter the height of triangle");
+		System.out.println("Enter the height of triangle");
 		height = in.nextDouble();
 		in.close();
 	}
