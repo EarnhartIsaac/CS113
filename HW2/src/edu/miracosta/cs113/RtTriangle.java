@@ -2,13 +2,8 @@ package edu.miracosta.cs113;
 
 import java.util.Scanner;
 
-/**
- * Represent a rectangle.
- * Extends shape
- * @author w7262233
- *
- */
-public class Rectangle extends Shape {
+public class RtTriangle extends Shape 
+{
 
 	//DATA
 	/** width of rectangle */
@@ -17,18 +12,18 @@ public class Rectangle extends Shape {
 	private double height = 0;
 	
 	//Constructors
-	public Rectangle()
+	public RtTriangle()
 	{
-		super("Rectangle");
+		super("RtTriangle");
 	}
 	
-	/**Constructs a rectangle of specific size
+	/**Constructs a right triangle of specific size
 	 * @param width the width
 	 * @param height the height
 	 */
-	public Rectangle(double width,double height)
+	public RtTriangle(double width,double height)
 	{
-		super("Rectangle");
+		super("RtTriangle");
 		this.width = width;
 		this.height = height;
 	}
@@ -46,22 +41,22 @@ public class Rectangle extends Shape {
 	@Override
 	public double computeArea() 
 	{
-		return height*width;
+		return height*width / 2;
 	}
 
 	@Override
 	public double computePerimeter() 
 	{
-		return 2 * (height + width);
+		return height + width + Math.sqrt((height * height) + (width * width));
 	}
 
 	@Override
 	public void readShapeData() 
 	{
 		Scanner in = new Scanner(System.in);
-		System.out.println("Enter the width of rectangle");
+		System.out.println("Enter the width of triangle");
 		width = in.nextDouble();
-		System.out.println("Eneter the height of rectangle");
+		System.out.println("Eneter the height of triangle");
 		height = in.nextDouble();
 		in.close();
 	}
