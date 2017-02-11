@@ -5,21 +5,37 @@ public class LinkedList<T>
 	private Node<T> head;
 	private int size;
 	
-	public Iterator iterator()
+	public LinkedList()
 	{
-		return new Iterator()
+		this.size = 0;
+		this.head = null;
 	}
 	
-	public void addFirst(T data)
+	public LinkedList(Node<T> head)
 	{
-		head = new Node<T>(data,head);
-		size++;
+		this.head = head;
+		this.size = 0;
 	}
 	
-	public void addAfter(Node<T> node,T data)
+	public Iterator<T> iterator()
 	{
-		node.setNextNode(new Node<T>(data,node.nextNode));
+		return new Iterator<T>(head);
+	}
+	
+	public Node<T> addFirst(T data)
+	{
+		Node<T> temp = new Node<T>(data,head);
+		head = temp;
 		size++;
+		return temp;
+	}
+	
+	public Node<T> addAfter(Node<T> node,T data)
+	{
+		Node<T> temp = new Node<T>(data,node.nextNode);
+		node.setNextNode(temp);
+		size++;
+		return temp;
 	}
 	
 	public boolean remove(Node<T> node)
@@ -30,10 +46,12 @@ public class LinkedList<T>
 		{
 			temp2 = temp1;
 			temp1 = temp1.nextNode;
+			size--;
 		}
 		if(temp1 != null)
 		{
 			temp2.nextNode = temp1.nextNode;
+			size--;
 			return true;
 		}
 		else
@@ -51,6 +69,7 @@ public class LinkedList<T>
 	public void removeFirst()
 	{
 		this.head = this.head.nextNode;
+		size--;
 	}
 	
 	public Node<T> getNode(int index)
@@ -63,6 +82,9 @@ public class LinkedList<T>
 		return temp;
 	}
 	
+	
+	//TODO Make this its own file class
+	@SuppressWarnings("hiding")
 	public class Node<T> 
 	{
 		private T data;

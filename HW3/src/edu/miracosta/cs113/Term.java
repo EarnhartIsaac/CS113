@@ -42,18 +42,23 @@ public class Term implements Comparable
 	 */
 	public int compareTo(Object object)
 	{
-		Term temp = (Term)object;
-		if(temp.getExponent() > this.getExponent())
+		if(object != null)
 		{
-			return -1;
+			Term temp = (Term)object;
+			if(temp.getExponent() > this.getExponent())
+			{
+				return -1;
+			}
+			else if(temp.getExponent() < this.getExponent())
+			{
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
 		}
-		else if(temp.getExponent() < this.getExponent())
-		{
-			return 1;
-		}
-		else
-		{
-			return 0;
-		}
+		else return -2;
+
 	}
 }

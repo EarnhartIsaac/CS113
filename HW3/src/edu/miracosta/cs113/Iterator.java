@@ -1,7 +1,5 @@
 package edu.miracosta.cs113;
 
-import edu.miracosta.cs113.LinkedList.Node;
-
 public class Iterator<T>
 {
 	private LinkedList<T>.Node<T> currentNode;
@@ -11,6 +9,11 @@ public class Iterator<T>
 	{
 		this.head = head;
 		currentNode.setNextNode(head);
+	}
+	
+	public LinkedList<T> linkedList()
+	{
+		return new LinkedList<T>(this.head);
 	}
 	
 	public LinkedList<T>.Node<T> next()
