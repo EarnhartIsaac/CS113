@@ -1,6 +1,6 @@
 package edu.miracosta.cs113;
 
-public class Term implements Comparable
+public class Term implements Comparable<Term>
 {
 	private int coefficient;
 	private int exponent;
@@ -40,7 +40,7 @@ public class Term implements Comparable
 	 * 			1 if this term's exponent is larger than object's,
 	 * 			0 if then have equal exponents
 	 */
-	public int compareTo(Object object)
+	public int compareTo(Term object)
 	{
 		if(object != null)
 		{
@@ -60,5 +60,21 @@ public class Term implements Comparable
 		}
 		else return -2;
 
+	}
+	
+	public String toString()
+	{
+		return this.getCoefficient() + "x^" + this.getExponent();
+	}
+	
+	public boolean equals(Object object)
+	{
+		if(object == null)
+		{
+			return false;
+		}
+		Term test = (Term)object;
+		return this.getCoefficient() == test.getCoefficient() &&
+			   this.getExponent() == test.getExponent();
 	}
 }
