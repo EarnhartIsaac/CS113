@@ -1,5 +1,7 @@
 package edu.miracosta.cs113;
 
+
+//TODO add documentation
 public class LinkedList<T>
 {
 	private Node<T> head;
@@ -22,6 +24,23 @@ public class LinkedList<T>
 		return new Iterator<T>(head);
 	}
 	
+	public void add(T data)
+	{
+		Node<T> temp = head;
+		if(temp != null)
+		{
+			while(temp.getNextNode() != null)
+			{
+				temp = temp.getNextNode();
+			}
+			this.addAfter(temp, data);
+		}
+		else
+		{
+			this.addFirst(data);
+		}
+	}
+	
 	public Node<T> addFirst(T data)
 	{
 		Node<T> temp = new Node<T>(data,head);
@@ -36,6 +55,12 @@ public class LinkedList<T>
 		node.setNextNode(temp);
 		size++;
 		return temp;
+	}
+	
+	public boolean remove(T data)
+	{
+		Node<T> temp = new Node<T>(data,null);
+		return this.remove(temp);
 	}
 	
 	public boolean remove(Node<T> node)
@@ -68,8 +93,11 @@ public class LinkedList<T>
 	
 	public void removeFirst()
 	{
-		this.head = this.head.getNextNode();
-		size--;
+		if(head != null)
+		{
+			this.head = this.head.getNextNode();
+			size--;
+		}
 	}
 	
 	public Node<T> getNode(int index)

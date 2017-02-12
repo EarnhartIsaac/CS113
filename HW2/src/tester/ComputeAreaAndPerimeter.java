@@ -24,6 +24,7 @@ public class ComputeAreaAndPerimeter
 	
 	public static Shape getShape()
 	{
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter C for circe");
 		System.out.println("Enter R for Rectangle");
