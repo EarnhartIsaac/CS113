@@ -32,6 +32,10 @@ public class PolynomialAdder
 				case 1:
 					previousNode = result.addFirst(firstTemp);
 					continueFirst = firstPolynomial.hasNext();
+					if(continueFirst)
+					{
+						firstTemp = firstPolynomial.next().getData();
+					}
 					//
 					System.out.println(previousNode + "1");
 					System.out.println(continueFirst);
@@ -42,7 +46,10 @@ public class PolynomialAdder
 				case -1:
 					previousNode = result.addFirst(secondTemp);
 					continueSecond = secondPolynomial.hasNext();
-					
+					if(continueSecond)
+					{
+						secondTemp = secondPolynomial.next().getData();
+					}
 					//
 					System.out.println(previousNode + "-1");
 					//
@@ -54,6 +61,14 @@ public class PolynomialAdder
 					continueFirst = firstPolynomial.hasNext();
 					continueSecond = secondPolynomial.hasNext();
 					
+					if(continueFirst)
+					{
+						firstTemp = firstPolynomial.next().getData();
+					}
+					if(continueSecond)
+					{
+						secondTemp = secondPolynomial.next().getData();
+					}
 					//
 					System.out.println(previousNode + "0");
 					//
@@ -61,23 +76,95 @@ public class PolynomialAdder
 					break;
 			}
 			
+			while(continueFirst || continueSecond)
+			{
+				if(continueFirst && continueSecond)
+				{
+					switch(firstTemp.compareTo(secondTemp))
+					{
+						case 1:
+							previousNode = result.addAfter(previousNode,firstTemp);
+							continueFirst = firstPolynomial.hasNext();
+							if(continueFirst)
+							{
+								firstTemp = firstPolynomial.next().getData();
+							}
+							
+							System.out.println(previousNode + "case1");
+
+							break;
+						case -1:
+							previousNode = result.addAfter(previousNode,secondTemp);
+							continueSecond = secondPolynomial.hasNext();
+							if(continueSecond)
+							{
+								secondTemp = secondPolynomial.next().getData();
+							}
+							
+							System.out.println(previousNode + "case-1");
+							
+							break;
+						case 0:
+							previousNode = result.addAfter(previousNode,
+														   new Term(firstTemp.getCoefficient() + 
+																   secondTemp.getCoefficient(),
+														   firstTemp.getExponent()));
+							continueFirst = firstPolynomial.hasNext();
+							continueSecond = secondPolynomial.hasNext();
+							if(continueFirst)
+							{
+								firstTemp = firstPolynomial.next().getData();
+							}
+							if(continueSecond)
+							{
+								secondTemp = secondPolynomial.next().getData();
+							}
+							
+							System.out.println(previousNode + "case0");
+							
+							break;
+					}
+					
+				}
+				else if(continueFirst)
+				{
+					while(firstPolynomial.hasNext())
+					{
+						firstTemp = firstPolynomial.next().getData();
+						previousNode = result.addAfter(previousNode,firstTemp);
+					}
+				}
+				else if(continueSecond)
+				{
+					while(secondPolynomial.hasNext())
+					{
+						secondTemp = secondPolynomial.next().getData();
+						previousNode = result.addAfter(previousNode,secondTemp);	
+					}
+				}
+			}
+			
 		}
 		else if(continueFirst)
 		{
 			firstTemp = firstPolynomial.next().getData();
 			previousNode = result.addFirst(firstTemp);
-			continueFirst = firstPolynomial.hasNext();
-			
-			System.out.println(previousNode);
+			while(firstPolynomial.hasNext())
+			{
+				firstTemp = firstPolynomial.next().getData();
+				previousNode = result.addAfter(previousNode,firstTemp);	
+			}
 		
 		}
 		else if(continueSecond)
 		{
 			secondTemp = secondPolynomial.next().getData();
 			previousNode = result.addFirst(secondTemp);
-			continueSecond = secondPolynomial.hasNext();
-			
-			System.out.println(previousNode);
+			while(secondPolynomial.hasNext())
+			{
+				secondTemp = secondPolynomial.next().getData();
+				previousNode = result.addAfter(previousNode,secondTemp);	
+			}
 		}
 		
 		//
@@ -85,61 +172,6 @@ public class PolynomialAdder
 		//System.out.println(continueSecond);
 		//
 		
-		while(continueFirst || continueSecond)
-		{
-			if(continueFirst && continueSecond)
-			{
-				firstTemp = firstPolynomial.next().getData();
-				secondTemp = secondPolynomial.next().getData();
-				switch(firstTemp.compareTo(secondTemp))
-				{
-					case 1:
-						previousNode = result.addAfter(previousNode,firstTemp);
-						continueFirst = firstPolynomial.hasNext();
-						
-						System.out.println(previousNode + "case1");
-
-						break;
-					case -1:
-						previousNode = result.addAfter(previousNode,secondTemp);
-						continueSecond = secondPolynomial.hasNext();
-						
-						System.out.println(previousNode + "case-1");
-						
-						break;
-					case 0:
-						previousNode = result.addAfter(previousNode,
-													   new Term(firstTemp.getCoefficient() + 
-															   secondTemp.getCoefficient(),
-													   firstTemp.getExponent()));
-						continueFirst = firstPolynomial.hasNext();
-						continueSecond = secondPolynomial.hasNext();
-						
-						System.out.println(previousNode + "case0");
-						
-						break;
-				}
-				
-			}
-			else if(continueFirst)
-			{
-				firstTemp = firstPolynomial.next().getData();
-				previousNode = result.addAfter(previousNode,firstTemp);
-				
-				System.out.println(previousNode);
-				
-				continueFirst = firstPolynomial.hasNext();
-			}
-			else if(continueSecond)
-			{
-				secondTemp = secondPolynomial.next().getData();
-				previousNode = result.addAfter(previousNode,secondTemp);
-				
-				System.out.println(previousNode);
-
-				continueSecond = secondPolynomial.hasNext();
-			}
-		}
 		return result;
 	}
 }

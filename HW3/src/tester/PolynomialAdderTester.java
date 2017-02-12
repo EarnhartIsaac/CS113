@@ -26,7 +26,7 @@ public class PolynomialAdderTester
 						secondPolynomial)));
 	}
 	
-	/*
+	
 	@Test
 	public void testCheckAnswer1()
 	{
@@ -55,7 +55,7 @@ public class PolynomialAdderTester
 		
 		testPolyAddition(result,polynomial1.iterator(),polynomial2.iterator());
 	}
-	*/
+	
 	
 	@Test
 	public void testCheckAnswer2()
@@ -82,6 +82,105 @@ public class PolynomialAdderTester
 		polynomial2.addFirst(new Term(-1,1));
 		polynomial2.addFirst(new Term(2,2));
 		//polynomial2.addFirst(new Term(-4,3));
+		
+		testPolyAddition(result,polynomial1.iterator(),polynomial2.iterator());
+	}
+	
+	
+	@Test
+	public void testCheckAnswer3()
+	{
+		LinkedList<Term> result = new LinkedList<Term>();
+		LinkedList<Term> polynomial1 = new LinkedList<Term>();
+		LinkedList<Term> polynomial2 = new LinkedList<Term>();
+		
+		//Adding terms to result
+		
+ 		result.addFirst(new Term(2,0));
+ 		result.addFirst(new Term(4,1));
+ 		result.addFirst(new Term(5,2));
+ 		result.addFirst(new Term(6,3));
+		
+		//Adding terms to first polynomial
+		polynomial1.addFirst(new Term(2,0));
+		polynomial1.addFirst(new Term(4,1));
+		polynomial1.addFirst(new Term(5,2));
+		polynomial1.addFirst(new Term(6,3));
+		
+		testPolyAddition(result,polynomial1.iterator(),polynomial2.iterator());
+	}
+	
+	@Test
+	public void testCheckAnswer4()
+	{
+		LinkedList<Term> result = new LinkedList<Term>();
+		LinkedList<Term> polynomial1 = new LinkedList<Term>();
+		LinkedList<Term> polynomial2 = new LinkedList<Term>();
+		
+		//Adding terms to result
+		
+ 		result.addFirst(new Term(1,0));
+ 		result.addFirst(new Term(-1,1));
+ 		result.addFirst(new Term(2,2));
+ 		result.addFirst(new Term(-4,3));
+		
+		//Adding terms to second polynomial
+		polynomial2.addFirst(new Term(1,0));
+		polynomial2.addFirst(new Term(-1,1));
+		polynomial2.addFirst(new Term(2,2));
+		polynomial2.addFirst(new Term(-4,3));
+		
+		testPolyAddition(result,polynomial1.iterator(),polynomial2.iterator());
+	}
+	
+	@Test
+	public void testCheckAnswer5()
+	{
+		LinkedList<Term> result = new LinkedList<Term>();
+		LinkedList<Term> polynomial1 = new LinkedList<Term>();
+		LinkedList<Term> polynomial2 = new LinkedList<Term>();
+		
+		//Adding terms to result
+		
+ 		result.addFirst(new Term(3,0));
+ 		result.addFirst(new Term(-1,1));
+ 		result.addFirst(new Term(2,2));
+ 		result.addFirst(new Term(-4,3));
+		
+		//Adding terms to first polynomial
+		polynomial1.addFirst(new Term(2,0));
+		
+		//Adding terms to second polynomial
+		polynomial2.addFirst(new Term(1,0));
+		polynomial2.addFirst(new Term(-1,1));
+		polynomial2.addFirst(new Term(2,2));
+		polynomial2.addFirst(new Term(-4,3));
+		
+		testPolyAddition(result,polynomial1.iterator(),polynomial2.iterator());
+	}
+	
+	@Test
+	public void testCheckAnswer6()
+	{
+		LinkedList<Term> result = new LinkedList<Term>();
+		LinkedList<Term> polynomial1 = new LinkedList<Term>();
+		LinkedList<Term> polynomial2 = new LinkedList<Term>();
+		
+		//Adding terms to result
+		
+ 		result.addFirst(new Term(3,0));
+ 		result.addFirst(new Term(4,1));
+ 		result.addFirst(new Term(5,2));
+ 		result.addFirst(new Term(6,3));
+		
+		//Adding terms to first polynomial
+		polynomial1.addFirst(new Term(2,0));
+		polynomial1.addFirst(new Term(4,1));
+		polynomial1.addFirst(new Term(5,2));
+		polynomial1.addFirst(new Term(6,3));
+		
+		//Adding terms to second polynomial
+		polynomial2.addFirst(new Term(1,0));
 		
 		testPolyAddition(result,polynomial1.iterator(),polynomial2.iterator());
 	}
