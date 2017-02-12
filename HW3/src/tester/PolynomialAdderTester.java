@@ -9,14 +9,7 @@ import edu.miracosta.cs113.PolynomialAdder;
 import edu.miracosta.cs113.Term;
 
 public class PolynomialAdderTester 
-{
-	/*
-	public static void main(String[] args)
-	{
-		
-	}
-	*/
-	
+{	
 	public void testPolyAddition(LinkedList<Term> result,Iterator<Term> firstPolynomial,
 			Iterator<Term> secondPolynomial)
 	{
@@ -171,7 +164,7 @@ public class PolynomialAdderTester
  		result.addFirst(new Term(3,0));
  		result.addFirst(new Term(4,1));
  		result.addFirst(new Term(5,2));
- 		result.addFirst(new Term(6,3));
+ 		result.addFirst(new Term(2,3));
 		
 		//Adding terms to first polynomial
 		polynomial1.addFirst(new Term(2,0));
@@ -181,6 +174,7 @@ public class PolynomialAdderTester
 		
 		//Adding terms to second polynomial
 		polynomial2.addFirst(new Term(1,0));
+		polynomial2.addFirst(new Term(-4,3));
 		
 		testPolyAddition(result,polynomial1.iterator(),polynomial2.iterator());
 	}
