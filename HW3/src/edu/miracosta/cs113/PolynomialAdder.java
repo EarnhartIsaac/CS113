@@ -15,11 +15,6 @@ public class PolynomialAdder
 		boolean continueFirst = firstPolynomial.hasNext();
 		boolean continueSecond = secondPolynomial.hasNext();
 		
-		//
-		System.out.println(continueFirst);
-		System.out.println(continueSecond);
-		//
-		
 		Term firstTemp;
 		Term secondTemp;
 		
@@ -36,11 +31,6 @@ public class PolynomialAdder
 					{
 						firstTemp = firstPolynomial.next().getData();
 					}
-					//
-					System.out.println(previousNode + "1");
-					System.out.println(continueFirst);
-					System.out.println(continueSecond);
-					//
 
 					break;
 				case -1:
@@ -50,9 +40,6 @@ public class PolynomialAdder
 					{
 						secondTemp = secondPolynomial.next().getData();
 					}
-					//
-					System.out.println(previousNode + "-1");
-					//
 
 					break;
 				case 0:
@@ -69,9 +56,6 @@ public class PolynomialAdder
 					{
 						secondTemp = secondPolynomial.next().getData();
 					}
-					//
-					System.out.println(previousNode + "0");
-					//
 					
 					break;
 			}
@@ -89,8 +73,6 @@ public class PolynomialAdder
 							{
 								firstTemp = firstPolynomial.next().getData();
 							}
-							
-							System.out.println(previousNode + "case1");
 
 							break;
 						case -1:
@@ -100,8 +82,6 @@ public class PolynomialAdder
 							{
 								secondTemp = secondPolynomial.next().getData();
 							}
-							
-							System.out.println(previousNode + "case-1");
 							
 							break;
 						case 0:
@@ -119,8 +99,6 @@ public class PolynomialAdder
 							{
 								secondTemp = secondPolynomial.next().getData();
 							}
-							
-							System.out.println(previousNode + "case0");
 							
 							break;
 					}
@@ -166,12 +144,7 @@ public class PolynomialAdder
 				previousNode = result.addAfter(previousNode,secondTemp);	
 			}
 		}
-		
-		//
-		//System.out.println(continueFirst);
-		//System.out.println(continueSecond);
-		//
-		
+
 		return result;
 	}
 }
