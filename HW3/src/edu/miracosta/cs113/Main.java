@@ -6,6 +6,7 @@ public class Main
 {
 	public static void main(String[] args)
 	{
+		@SuppressWarnings("resource")
 		Scanner keyboard = new Scanner(System.in);
 		LinkedList<Term> polynomial1 = new LinkedList<Term>();
 		LinkedList<Term> polynomial2 = new LinkedList<Term>();
@@ -82,7 +83,7 @@ public class Main
 			}
 		}
 		
-		System.out.println("Added polynomial");
+		System.out.println("Added polynomial:");
 		LinkedList<Term> temp = PolynomialAdder.addPolynomials(polynomial1.iterator(), polynomial2.iterator());
 		Iterator<Term> tempIterator = temp.iterator();
 		while(tempIterator.hasNext())
