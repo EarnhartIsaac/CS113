@@ -13,105 +13,158 @@ public class DoubleLinkedList<E> implements List<E>
 	private int size;
 	
 	@Override
-	public boolean add(E arg0)
+	public boolean add(E data)
 	{
-		
+		this.listIterator(size).add(data);
 		return true;
 	}
 
 	@Override
-	public void add(int arg0, E arg1) {
+	public void add(int index, E data) 
+	{
+		this.listIterator(index).add(data);
+	}
+
+	@Override
+	public boolean contains(Object object) 
+	{
+		return this.indexOf(object) != -1;
+	}
+
+
+	@Override
+	public E get(int index) 
+	{
+		return this.listIterator(index).next();
+	}
+
+	@Override
+	public int indexOf(Object object) 
+	{
+		DoubleListIterator temp = (DoubleListIterator)this.listIterator();
+		while(temp.hasNext())
+		{
+			if(temp.next().equals(object))
+			{
+				return temp.index - 1;
+			}
+		}
+		return -1;
+	}
+
+	@Override
+	public boolean isEmpty() 
+	{
+		return size == 0;
+	}
+
+	@Override
+	public int lastIndexOf(Object object)
+	{
+		DoubleListIterator temp = (DoubleListIterator)this.listIterator(size);
+		while(temp.hasPrevious())
+		{
+			if(temp.previous().equals(object))
+			{
+				return temp.index - 1;
+			}
+		}
+		return -1;
+	}
+
+	@Override
+	public ListIterator<E> listIterator() 
+	{
+		return new DoubleListIterator(0);
+	}
+
+	@Override
+	public ListIterator<E> listIterator(int index) 
+	{
+		return new DoubleListIterator(index);
+	}
+
+	@Override
+	public boolean remove(Object object) 
+	{
+		DoubleListIterator temp = (DoubleListIterator)this.listIterator();
+		while(temp.hasNext())
+		{
+			if(temp.next().equals(object))
+			{
+				temp.remove();
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public E remove(int index) 
+	{
+		DoubleListIterator temp = (DoubleListIterator)this.listIterator(index);
+		E tempData = temp.next();
+		temp.remove();
+		return tempData;
+	}
+
+	@Override
+	public E set(int index, E data) 
+	{
+		DoubleListIterator temp = (DoubleListIterator)this.listIterator(index);
+		E tempData = temp.next();
+		temp.set(data);
+		return tempData;
+	}
+
+	@Override
+	public int size() 
+	{
+		return size;
+	}
+
+	
+	/*************************
+	 * INCOMPLETE METHOD STUBS
+	 * *************************
+	 */
+	
+
+	@Override
+	public boolean addAll(Collection<? extends E> arg0) 
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addAll(int arg0, Collection<? extends E> arg1) 
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void clear() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean addAll(Collection<? extends E> arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean addAll(int arg0, Collection<? extends E> arg1) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean contains(Object arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean containsAll(Collection<?> arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public E get(int arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int indexOf(Object arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int lastIndexOf(Object arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ListIterator<E> listIterator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ListIterator<E> listIterator(int arg0) 
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean remove(Object arg0) 
+	public boolean containsAll(Collection<?> arg0) 
 	{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	@Override
-	public E remove(int arg0) 
+	public Iterator<E> iterator() 
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public boolean removeAll(Collection<?> arg0) 
 	{
@@ -125,21 +178,7 @@ public class DoubleLinkedList<E> implements List<E>
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
-	public E set(int arg0, E arg1) 
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int size() 
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
 	@Override
 	public List<E> subList(int arg0, int arg1) 
 	{
@@ -212,20 +251,37 @@ public class DoubleLinkedList<E> implements List<E>
 	
 		
 		@Override
-		public void add(E arg0) 
+		public void add(E data) 
 		{
 			if(head == null)
 			{
-				head = new Node<E>(arg0);
+				head = new Node<E>(data);
+				tail = head;
 			}
-			else if(nextItem == head)
+			else if (nextItem == head) 
 			{
-				head = new Node<E>(arg0,null,nextItem);
+				Node<E> newNode = new Node<E>(data);
+				newNode.nextNode = nextItem;
+				nextItem.previousNode = newNode;
+				head = newNode;
 			}
-			else if(nextItem == null)
+			else if (nextItem == null) 
 			{
-				
+				Node<E> newNode = new Node<E>(data,tail,null);
+				tail.nextNode = newNode;
+				tail = newNode;
 			}
+			else 
+			{
+				Node<E> newNode = new Node<E>(data);
+				newNode.previousNode = nextItem.previousNode;
+				nextItem.previousNode.nextNode = newNode;
+				newNode.nextNode = nextItem;
+				nextItem.previousNode = newNode;
+			}
+			size++;
+			index++;
+			lastItemReturned = null;
 		} 
 
 		@Override
@@ -237,7 +293,19 @@ public class DoubleLinkedList<E> implements List<E>
 		@Override
 		public boolean hasPrevious() 
 		{
-			return this.nextItem.previousNode != null;
+			//Changed given hasPrevious Method
+			//Old method was 
+			//		return (nextItem == null && size != 0)
+			//				|| (nextItem.previousNode != null);
+			//This throws an exception if nextItem is null but list isn't empty
+			if(nextItem != null)
+			{
+				return (nextItem.previousNode != null);
+			}
+			else
+			{
+				return (size != 0);
+			}
 		}
 
 		@Override
@@ -255,8 +323,13 @@ public class DoubleLinkedList<E> implements List<E>
 		@Override
 		public int nextIndex() 
 		{
-			// TODO Auto-generated method stub
-			return 0;
+			return index + 1;
+		}
+		
+		@Override
+		public int previousIndex() 
+		{
+			return index - 1;
 		}
 
 		@Override
@@ -280,24 +353,36 @@ public class DoubleLinkedList<E> implements List<E>
 		}
 
 		@Override
-		public int previousIndex() 
-		{
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
 		public void remove() 
 		{
-			// TODO Auto-generated method stub
+			if(lastItemReturned != null)
+			{
+				if(lastItemReturned.previousNode == null && lastItemReturned.nextNode == null)
+				{
+					lastItemReturned.previousNode.nextNode = lastItemReturned.nextNode;
+					lastItemReturned.nextNode.previousNode = lastItemReturned.previousNode;
+					lastItemReturned = null;
+				}
+				else if(lastItemReturned.previousNode == null)
+				{
+					lastItemReturned.nextNode.previousNode = null;
+					head = lastItemReturned.nextNode;
+					lastItemReturned = null;
+				}
+				else
+				{
+					lastItemReturned.previousNode.nextNode = null;
+					tail = lastItemReturned.previousNode;
+					lastItemReturned = null;
+				}
+			}
 			
 		}
 
 		@Override
 		public void set(E e) 
 		{
-			// TODO Auto-generated method stub
-			
+			lastItemReturned.data = e;
 		}
 		
 	}
