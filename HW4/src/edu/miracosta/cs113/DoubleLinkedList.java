@@ -15,6 +15,7 @@ public class DoubleLinkedList<E> implements List<E>
 	@Override
 	public boolean add(E data)
 	{
+		System.out.println(data);
 		this.listIterator(size).add(data);
 		return true;
 	}
@@ -223,7 +224,7 @@ public class DoubleLinkedList<E> implements List<E>
 	{
 		private Node<E> nextItem;
 		private Node<E> lastItemReturned;
-		private int index;
+		private int index = 0;
 
 		public DoubleListIterator(int i) 
 		{
@@ -255,11 +256,17 @@ public class DoubleLinkedList<E> implements List<E>
 		{
 			if(head == null)
 			{
+				
+				System.out.println("head is null");
+				
 				head = new Node<E>(data);
 				tail = head;
 			}
 			else if (nextItem == head) 
 			{
+				
+				System.out.println("head is nextItem");
+				
 				Node<E> newNode = new Node<E>(data);
 				newNode.nextNode = nextItem;
 				nextItem.previousNode = newNode;
@@ -267,12 +274,18 @@ public class DoubleLinkedList<E> implements List<E>
 			}
 			else if (nextItem == null) 
 			{
+				
+				System.out.println("nextItem is null");
+				
 				Node<E> newNode = new Node<E>(data,tail,null);
 				tail.nextNode = newNode;
 				tail = newNode;
 			}
 			else 
 			{
+				
+				System.out.println("bing");
+				
 				Node<E> newNode = new Node<E>(data);
 				newNode.previousNode = nextItem.previousNode;
 				nextItem.previousNode.nextNode = newNode;
@@ -359,8 +372,6 @@ public class DoubleLinkedList<E> implements List<E>
 			{
 				if(lastItemReturned.previousNode == null && lastItemReturned.nextNode == null)
 				{
-					lastItemReturned.previousNode.nextNode = lastItemReturned.nextNode;
-					lastItemReturned.nextNode.previousNode = lastItemReturned.previousNode;
 					lastItemReturned = null;
 				}
 				else if(lastItemReturned.previousNode == null)
@@ -369,10 +380,16 @@ public class DoubleLinkedList<E> implements List<E>
 					head = lastItemReturned.nextNode;
 					lastItemReturned = null;
 				}
-				else
+				else if(lastItemReturned.nextNode == null)
 				{
 					lastItemReturned.previousNode.nextNode = null;
 					tail = lastItemReturned.previousNode;
+					lastItemReturned = null;
+				}
+				else
+				{
+					lastItemReturned.previousNode.nextNode = lastItemReturned.nextNode;
+					lastItemReturned.nextNode.previousNode = lastItemReturned.previousNode;
 					lastItemReturned = null;
 				}
 			}
