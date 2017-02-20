@@ -26,9 +26,7 @@ public class CourseRegistration
 				case 'a':
 					System.out.println("Please enter student name");
 					userInput = keyboard.nextLine();
-					Student temp = new Student(userInput);
-					System.out.println(temp);
-					studentList.add(temp);
+					studentList.add(new Student(userInput));
 					break;
 				case 'B':
 				case 'b':
@@ -49,7 +47,6 @@ public class CourseRegistration
 				default:
 					running = false;
 			}
-			System.out.println(studentList.get(0) == null);
 		}
 		
 		keyboard.close();

@@ -27,6 +27,11 @@ public class Student
 		this.setIDNumber("Not assigned");
 	}
 	
+	public Student()
+	{
+		
+	}
+	
 	public String getName()
 	{
 		return this.name;
@@ -47,8 +52,9 @@ public class Student
 		return false;
 	}
 	
+	@Override
 	public String toString()
 	{
-		return this.name + this.iDNumber;
+		return this.name;
 	}
 }

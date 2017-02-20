@@ -36,4 +36,19 @@ public class Student
 	{
 		return this.iDNumber;
 	}
+	
+	public boolean equals(Object object)
+	{
+		if(object != null)
+		{
+			Student temp = (Student)object;
+			return this.name.equals(temp.getName());
+		}
+		return false;
+	}
+	
+	public String toString()
+	{
+		return this.name;
+	}
 }

@@ -256,17 +256,11 @@ public class DoubleLinkedList<E> implements List<E>
 		{
 			if(head == null)
 			{
-				
-				System.out.println("head is null");
-				
 				head = new Node<E>(data);
 				tail = head;
 			}
 			else if (nextItem == head) 
 			{
-				
-				System.out.println("head is nextItem");
-				
 				Node<E> newNode = new Node<E>(data);
 				newNode.nextNode = nextItem;
 				nextItem.previousNode = newNode;
@@ -274,18 +268,12 @@ public class DoubleLinkedList<E> implements List<E>
 			}
 			else if (nextItem == null) 
 			{
-				
-				System.out.println("nextItem is null");
-				
 				Node<E> newNode = new Node<E>(data,tail,null);
 				tail.nextNode = newNode;
 				tail = newNode;
 			}
 			else 
 			{
-				
-				System.out.println("bing");
-				
 				Node<E> newNode = new Node<E>(data);
 				newNode.previousNode = nextItem.previousNode;
 				nextItem.previousNode.nextNode = newNode;
