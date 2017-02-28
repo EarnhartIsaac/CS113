@@ -270,6 +270,7 @@ public class DoubleLinkedList<E> implements List<E>
 			{
 				Node<E> newNode = new Node<E>(data,tail,null);
 				tail.nextNode = newNode;
+				newNode.previousNode = tail;
 				tail = newNode;
 			}
 			else 
