@@ -3,6 +3,8 @@ package edu.miracosta.cs113;
 import java.util.Scanner;
 import userInput.Cs113;
 import dataStructures.ArrayStack;
+import dataStructures.LinkedListStack;
+import dataStructures.Stack;
 
 //TODO convert to lower case when pushing data to the stack rather than with toLowerCase to increase efficiency
 
@@ -54,8 +56,8 @@ public class PalindromSolver
 	public static void main(String[] args)
 	{
 		Scanner keyboard = new Scanner(System.in);
-		ArrayStack<Character> palStack1 = new ArrayStack<Character>();
-		ArrayStack<Character> palStack2 = new ArrayStack<Character>();
+		Stack<Character> palStack1 = new ArrayStack<Character>();
+		Stack<Character> palStack2 = new LinkedListStack<Character>();
 		
 		String userInput = Cs113.readString("Please enter a word or phrase to be checked",keyboard); 
 		String userInputStr = userInput.toLowerCase();
