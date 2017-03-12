@@ -1,9 +1,16 @@
 package edu.miracosta.cs113;
 
+import java.util.Iterator;
+import java.util.List;
+
 import dataStructures.ArrayQueue;
 
-public class Printer 
+public abstract class Printer 
 {
+	/*****************************
+	 * ****** STATIC DATA ******
+	 ****************************/
+	
 	/**
 	 * Universal timer for all the printers
 	 */
@@ -12,14 +19,16 @@ public class Printer
 	public static final int DEFAULT_LOWER_BOUND = 1;
 	public static final int DEFAULT_UPPER_BOUND = 2;
 	public static final String DEFAULT_PRINTER_NAME = "Printer";
-	/**
-	 * Speed is defined as pages per tap
-	 */
-	public static final int DEFAULT_SPEED = 1;
 	
+	public static final int DEFAULT_TICKS_PER_JOB = 1;
 	
-	private int printerSpeed;
-	private int tapsLeft;
+	/*****************************
+	 * *** INSTANCE VARIABLES ***
+	 ****************************/
+	
+	//TODO make printer speed a double and truncate for page printing
+
+	private int ticksLeft;
 	private String printerName;
 	
 	/**
@@ -47,6 +56,22 @@ public class Printer
 	 */
 	private int upperBound;
 	
+	/*****************************
+	 * ***** MUTATOR METHODS *****
+	 ****************************/
+	
+	/**
+	 * Sets the number of ticks left to finish a print job
+	 * of so many pages
+	 * @param pages the number of pages to calculate
+	 */
+	protected void setTicksLeft(int ticks)
+	{
+		this.ticksLeft = ticks;
+	}
+	
+	protected abstract boolean resetTicks();
+	
 	/**
 	 * Sets the lower bound to lower.
 	 * lower boundary will default to DEFAULT_LOWER_BOUND
@@ -54,7 +79,7 @@ public class Printer
 	 * @param lower the lower bound
 	 * @return false if entered boundaries were invalid, otherwise true 
 	 */
-	private boolean setLowerBound(int lower)
+	public boolean setLowerBound(int lower)
 	{
 		if(lower <= 0)
 		{
@@ -72,7 +97,7 @@ public class Printer
 	 * @param upper the upper bound
 	 * @return false if entered boundaries were invalid, otherwise true 
 	 */
-	private boolean setUpperBound(int upper)
+	public boolean setUpperBound(int upper)
 	{
 		if(upper <= 1)
 		{
@@ -104,6 +129,9 @@ public class Printer
 		return false;
 	}
 	
+	/*****************************
+	 * ***** CONSTRUCTORS *****
+	 ****************************/
 	
 	/**
 	 * Creates a printer with specific lower and upper bounds.
@@ -111,19 +139,44 @@ public class Printer
 	 * and DEFAULT_UPPER_BOUND upper if entered boundaries are invalid
 	 * @param lower the lower bound
 	 * @param upper the upper bound
+	 * @param name name of this printer
+	 * @param speed the speed of this printer
 	 */
 	public Printer(int lower,int upper,String name)
 	{
 		this.setBoundaries(lower, upper);
 		this.printerName = name;
-		this.printerSpeed = DEFAULT_SPEED;
 	}
 	
 	public Printer(int lower,int upper)
 	{
 		this(lower,upper,DEFAULT_PRINTER_NAME);
 	}
+	
+	public Printer()
+	{
+		this(DEFAULT_LOWER_BOUND,
+				DEFAULT_UPPER_BOUND);
+	}
 
+	/*****************************
+	 * ***** OTHER METHODS *****
+	 ****************************/
+	
+	/**
+	 * Returns a reference to the current job being printed
+	 * @return job reference
+	 */
+	public PrintJob getCurrentJob()
+	{
+		return this.currentJob;
+	}
+	
+	public boolean isPrinting()
+	{
+		return this.currentJob != null;
+	}
+	
 	/**
 	 * Adds a print job the queue.
 	 * If the given print job is not
@@ -136,16 +189,18 @@ public class Printer
 		if(inBounds(item))
 		{
 			this.printQueue.offer(item);
+			
+			//TODO Remove output method
+			//*****************************************************
+			System.out.println(item + " added to queue for " + this.printerName + 
+								" at minute " + currentTime);
+			//*****************************************************
+			
 			return true;
 		}
 		return false;
 	}
 	
-	
-	private int tap()
-	{
-		return --this.tapsLeft;
-	}
 	
 	/**
 	 * Checks to see if a PrintJob is valid for this printer
@@ -172,37 +227,92 @@ public class Printer
 	{
 		if(currentJob != null)
 		{
-			this.tap();
-			
-			if(this.tapsLeft == 0)
+			--this.ticksLeft;
+			if(this.ticksLeft == 0)
 			{
+				//TODO Remove output method
+				//*****************************************************
+				System.out.println(this.currentJob + " finished on " + this.printerName + 
+									" at minute " + currentTime);
+				//*****************************************************
+				
 				this.currentJob.finish();
 				this.currentJob = printQueue.poll();
+				this.resetTicks();
 			}
 		}
 		else
 		{
 			this.currentJob = printQueue.poll();
+			if(currentJob != null)
+			{
+				this.resetTicks();
+			}
 		}
 	}
 	
-	private void calculateTapsLeft(int pages)
+	/**
+	 * Returns the data from this instance in the form
+	 * <printer name> current job: <current job name>
+	 * @return string representing data in this instance
+	 */
+	public String toString()
 	{
-		this.tapsLeft = pages * printerSpeed;
+		return this.printerName + "current job:  " + this.currentJob;
 	}
 	
+	/*****************************
+	 * ***** STATIC METHODS *****
+	 ****************************/
+	
+	//TODO give incrementTime other features 
 	/**
 	 * Increments the universal counter for the printers
 	 * @return the current time after time increment
 	 */
-	public static int incrementTime()
+	private static int incrementTime()
 	{
 		return ++currentTime;
 	}
 	
-	public String toString()
+	/**
+	 * Ticks all printers in the printers array
+	 * @param printers array of printers to tick
+	 * @param numberUsed number of spaces used in printers array
+	 * @return false if printers is null
+	 */
+	public static boolean syncronizedTick(Printer[] printers,int numberUsed)
 	{
-		return this.printerName + "current job:  " + this.currentJob;
+		if(printers != null)
+		{
+			for(int counter = 0;counter<numberUsed;counter++)
+			{
+				printers[counter].tick();
+			}
+			incrementTime();
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Ticks all printers in the printers list
+	 * @param printers list of printers to tick
+	 * @return false if printers is null
+	 */
+	public static boolean syncronizedTick(List<Printer> printers)
+	{
+		if(printers != null)
+		{
+			Iterator<Printer> itr = printers.iterator();
+			while(itr.hasNext())
+			{
+				itr.next().tick();
+			}
+			incrementTime();
+			return true;
+		}
+		return false;
 	}
 	
 }

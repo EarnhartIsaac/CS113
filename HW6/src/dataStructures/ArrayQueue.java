@@ -5,10 +5,26 @@ import java.util.NoSuchElementException;
 
 public class ArrayQueue<E> extends ArrayQueueAdapter<E>
 {
+	public static final int DEFAULT_START_SIZE = 10;
+	
 	private E[] theData;
 	private int front;
 	private int rear;
 	private int size;
+	
+	@SuppressWarnings("unchecked")
+	public ArrayQueue(int initCapacity)
+	{
+		theData = (E[])new Object[initCapacity];
+		front = 0;
+		rear = initCapacity - 1;
+		size = 0;
+	}
+	
+	public ArrayQueue()
+	{
+		this(DEFAULT_START_SIZE);
+	}
 	
 	@SuppressWarnings("unchecked")
 	private void reallocate() 
