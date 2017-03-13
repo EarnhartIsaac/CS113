@@ -1,33 +1,25 @@
 package driver;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Change 
 {
+	public static final int[] COIN_VALUES = new int[]{25,10,5,1};
+	
 	public static int combinationCount = 0;
-	public static List<Combination> combinations = new ArrayList<Combination>();
 	
 	public static void main(String[] args)
 	{
 		calculateChange(5);
 		combinationCount = 0;
-		combinations = new ArrayList<Combination>();
 		calculateChange(10);
 		combinationCount = 0;
-		combinations = new ArrayList<Combination>();
 		calculateChange(15);
 		combinationCount = 0;
-		combinations = new ArrayList<Combination>();
 		calculateChange(20);
 		combinationCount = 0;
-		combinations = new ArrayList<Combination>();
 		calculateChange(25);
 		combinationCount = 0;
-		combinations = new ArrayList<Combination>();
 		calculateChange(30);
 		combinationCount = 0;
-		combinations = new ArrayList<Combination>();
 		calculateChange(75);
 	}
 	
@@ -35,7 +27,7 @@ public class Change
 	
 	public static void calculateChange(int change)
 	{
-		getChange(change,0,0,0,0);
+		getChange(change,0,0,0,0,0);
 	}
 	
 	//SO MANY ACTIVATION FRAMES
@@ -43,55 +35,53 @@ public class Change
 							int quarters,
 							int dimes,
 							int nickles,
-							int pennies)
+							int pennies,
+							int maxCoin)
 	{
-		if(changeLeft >= 25)
+		if(changeLeft >= 25 && COIN_VALUES[maxCoin] >= 25)
 		{
 			getChange(changeLeft - 25,
 					quarters + 1,
 					dimes,
 					nickles,
-					pennies);
+					pennies,
+					0);
 		}
-		if(changeLeft >= 10)
+		if(changeLeft >= 10 && COIN_VALUES[maxCoin] >= 10)
 		{
 			getChange(changeLeft - 10,
 					quarters,
 					dimes + 1,
 					nickles,
-					pennies);
+					pennies,
+					1);
 		}
-		if(changeLeft >= 5 )
+		if(changeLeft >= 5 && COIN_VALUES[maxCoin] >= 5)
 		{
 			getChange(changeLeft - 5,
 					quarters,
 					dimes,
 					nickles + 1,
-					pennies);
+					pennies,
+					2);
 		}
-		if(changeLeft >= 1)
+		if(changeLeft >= 1 && COIN_VALUES[maxCoin] >= 1)
 		{
 			getChange(changeLeft - 1,
 					quarters,
 					dimes,
 					nickles,
-					pennies + 1);
+					pennies + 1,
+					3);
 		}
 		if(changeLeft == 0)
 		{
-			//It takes forever to compute but IT WORKS, NO DUPLICATIONS
-			//not sure how to avoid duplications algorithmically without hogging stupid amounts of memory
-			//but if I could runtime wouldn't be piss poor
-			if(combinations.indexOf(new Combination(quarters,dimes,nickles,pennies)) == -1)
-			{
-				combinations.add(new Combination(quarters,dimes,nickles,pennies));
-				System.out.println("****************************");
-				System.out.println("Combination: " + ++combinationCount);
-				System.out.println("Quarters: " + quarters);
-				System.out.println("Dimes: " + dimes);
-				System.out.println("Nickles: " + nickles);
-				System.out.println("Pennies: " + pennies);
-			}
+			System.out.println("****************************");
+			System.out.println("Combination: " + ++combinationCount);
+			System.out.println("Quarters: " + quarters);
+			System.out.println("Dimes: " + dimes);
+			System.out.println("Nickles: " + nickles);
+			System.out.println("Pennies: " + pennies);
 		}
 	}
 }
