@@ -13,7 +13,7 @@ public class MorseCodeDecoder
 		morseDecoder.add(null);
 		treeFromFile("morse.txt",morseDecoder);
 		System.out.println(morseDecoder.findMorsePath('e'));
-		System.out.println(morseDecoder.decode("*--*"));
+		System.out.println(morseDecoder.decode("*--"));
 		
 	}
 	/**

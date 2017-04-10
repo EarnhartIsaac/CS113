@@ -1,0 +1,30 @@
+2) 001100000011000110011100100100011 111000000011101001110000110101000010100010
+		Scissors
+3)
+	a) height: 3
+	   not a full tree
+	   is a complete tree
+	   is not a binary search tree
+	   	40
+	      32  50
+	     30
+	b) height: 3
+	   not a full tree
+	   is a complete tree
+	   is not a binary search tree
+	   	   40
+	      32       55
+	    30  35   50
+4)
+	2) complete
+	3) complete
+	4) neither
+	5) neither
+5)	
+				Programs
+			/			\
+	Microsoft Office			NetScape
+	/		\			/	\
+Office			Templates	Chrome		Plugins
+					/
+					Cool
