@@ -12,7 +12,8 @@ public class MorseCodeDecoder
 		BinaryTree<Character> morseDecoder = new BinaryTree<Character>();
 		morseDecoder.add(null);
 		treeFromFile("morse.txt",morseDecoder);
-		System.out.println(morseDecoder.findMorsePath('t'));
+		System.out.println(morseDecoder.findMorsePath('e'));
+		System.out.println(morseDecoder.decode("*--*"));
 		
 	}
 	/**

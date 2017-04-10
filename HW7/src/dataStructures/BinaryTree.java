@@ -152,11 +152,31 @@ public class BinaryTree<E> implements BinaryTreeInterface<E>
 		return sb.toString();
 	}
 	
+	public E decode(String morseCode)
+	{
+		if(morseCode.length() != 0)
+		{
+			switch(morseCode.charAt(0))
+			{
+				case '*':
+					return this.getLeftSubtree().decode(morseCode.substring(1));
+				case '-':
+					return this.getRightSubtree().decode(morseCode.substring(1));
+				default:
+					return null;
+			}
+		}
+		else
+		{
+			return this.root.data;
+		}
+	}
+	
 	private void findPath(Node<E> node,E data,String currentPath,StringBuilder sb)
 	{
 		if(node != null)
 		{
-			if(this.root.data.equals(data))
+			if(node.data != null && node.data.equals(data))
 			{
 				sb.append(currentPath);
 			}
