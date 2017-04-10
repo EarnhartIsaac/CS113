@@ -1,6 +1,7 @@
 package dataStructures;
 
-public interface BinaryTreeInterface<E> {
+public interface BinaryTreeInterface<E> 
+{
 	public BinaryTree<E> getLeftSubtree();
 
 	public BinaryTree<E> getRightSubtree();

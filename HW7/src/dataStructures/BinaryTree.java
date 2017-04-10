@@ -54,8 +54,13 @@ public class BinaryTree<E> implements BinaryTreeInterface<E>
 		
 		public String toString()
 		{
-			return data.toString();
+			if(data != null)
+			{
+				return data.toString();
+			}
+			return "";
 		}
+
 	}
 
 	@Override
@@ -83,12 +88,37 @@ public class BinaryTree<E> implements BinaryTreeInterface<E>
 			return null;
 		}
 	}
-
+	
+	public void createLeftNode()
+	{
+		this.root.left = new Node<E>(null);
+	}
+	
+	public void createRightNode()
+	{
+		this.root.right = new Node<E>(null);
+	}
+	
 	@Override
 	public E getData() 
 	{
-		// TODO Auto-generated method stub
+		if(root != null)
+		{
+			return root.data;
+		}
 		return null;
+	}
+	
+	public void add(E data)
+	{
+		if(this.root == null)
+		{
+			this.root = new Node<E>(data);
+		}
+		else
+		{
+			this.root.data = data;
+		}
 	}
 
 	@Override
@@ -99,10 +129,46 @@ public class BinaryTree<E> implements BinaryTreeInterface<E>
 	
 	private void preOrderTraversal(Node<E> node,int depth,StringBuilder sb)
 	{
-		
+		for (int i = 1; i < depth; i++) 
+		{
+			sb.append(" ");
+		}
+		if (node == null) 
+		{
+			sb.append("null\n");
+		} 
+		else 
+		{
+			sb.append(node.toString() + "\n");
+			preOrderTraversal(node.left, depth + 1, sb);
+			preOrderTraversal(node.right, depth + 1, sb);
+		}
 	}
 	
-	public static BinaryTree<String> readBinary(Scanner scan)
+	public String findMorsePath(E data)
+	{
+		StringBuilder sb = new StringBuilder();
+		findPath(this.root,data,"",sb);
+		return sb.toString();
+	}
+	
+	private void findPath(Node<E> node,E data,String currentPath,StringBuilder sb)
+	{
+		if(node != null)
+		{
+			if(this.root.data.equals(data))
+			{
+				sb.append(currentPath);
+			}
+			else
+			{
+				findPath(node.left,data,currentPath + "*",sb);
+				findPath(node.right,data,currentPath + "-",sb);
+			}
+		}
+	}
+	
+	public static BinaryTree<String> readBinaryString(Scanner scan)
 	{
 		String data = scan.next();
 		if(data.equals("null"))
@@ -111,9 +177,32 @@ public class BinaryTree<E> implements BinaryTreeInterface<E>
 		}
 		else
 		{
-			BinaryTree<String> leftTree = readBinary(scan);
-			BinaryTree<String> rightTree = readBinary(scan);
+			BinaryTree<String> leftTree = readBinaryString(scan);
+			BinaryTree<String> rightTree = readBinaryString(scan);
 			return new BinaryTree<String>(data, leftTree, rightTree);
 		}
+	}
+	
+	public static BinaryTree<Character> readBinaryChar(Scanner scan)
+	{
+		String data = scan.next();
+		if(data.equals("null"))
+		{
+			return null;
+		}
+		else
+		{
+			BinaryTree<Character> leftTree = readBinaryChar(scan);
+			BinaryTree<Character> rightTree = readBinaryChar(scan);
+			return new BinaryTree<Character>(data.charAt(0), leftTree, rightTree);
+		}
+	}
+	
+	
+	public String toString() 
+	{
+		StringBuilder sb = new StringBuilder();
+		preOrderTraversal(root, 1, sb);
+		return sb.toString();
 	}
 } 
