@@ -14,6 +14,7 @@ public class MorseCodeDecoder
 		treeFromFile("morse.txt",morseDecoder);
 		System.out.println(morseDecoder.findMorsePath('e'));
 		System.out.println(morseDecoder.decode("*--"));
+		System.out.println(morseDecoder);
 		
 	}
 	/**
@@ -56,10 +57,13 @@ public class MorseCodeDecoder
 		try
 		{
 			Scanner fileInput = new Scanner(new FileInputStream(textFile));
+			
 			while(fileInput.hasNext())
 			{
 				addToTree(fileInput.next(),fileInput.next().charAt(0),tree);
 			}
+			
+			fileInput.close();
 		}
 		catch(FileNotFoundException e)
 		{
