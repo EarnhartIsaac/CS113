@@ -314,6 +314,7 @@ public class SingleLinkedList<E> extends SingleLinkedListAdapter<E>
 			{
 				if(lastItemReturned.previousNode == null && lastItemReturned.nextNode == null)
 				{
+					head = null;
 					lastItemReturned = null;
 				}
 				else if(lastItemReturned.previousNode == null)

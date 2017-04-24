@@ -1,7 +1,6 @@
 package myDataStructures;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 public abstract class SingleLinkedListAdapter<E> implements List<E>
